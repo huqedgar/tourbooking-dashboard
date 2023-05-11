@@ -1,13 +1,13 @@
-import { Box, Button, Typography, useTheme } from '@mui/material';
-import { DataGrid, GridToolbar } from '@mui/x-data-grid';
-import { tokens } from '../theme';
-import Header from '../layouts/components/Header';
 import { useCallback, useEffect, useState } from 'react';
 import { authAPI, endpoints } from '../configs/API';
+import moment from 'moment-timezone';
+import { NumericFormat } from 'react-number-format';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { NumericFormat } from 'react-number-format';
-import moment from 'moment-timezone';
+import { tokens } from '../theme';
+import { Box, Button, Typography, useTheme } from '@mui/material';
+import { DataGrid, GridToolbar } from '@mui/x-data-grid';
+import Header from '../layouts/components/Header';
 
 const Invoices = () => {
     const theme = useTheme();
@@ -141,7 +141,7 @@ const Invoices = () => {
 
     return (
         <Box m="20px">
-            <Header title="INVOICES" subtitle="List of Invoice Balances" />
+            <Header title="Bills" subtitle="List of bills" />
             <Box
                 m="40px 0 0 0"
                 height="75vh"

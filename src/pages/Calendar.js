@@ -38,7 +38,7 @@ const Calendar = () => {
 
     return (
         <Box m="20px">
-            <Header title="Calendar" subtitle="Full Calendar Interactive Page" />
+            <Header title="Calendar" subtitle="Full calendar interactive page" />
             <Box display="flex" justifyContent="space-between">
                 {/* CALENDAR SIDEBAR */}
                 <Box flex="1 1 20%" backgroundColor={colors.primary[400]} p="15px" borderRadius="4px">

@@ -13,7 +13,7 @@ const Form = () => {
 
     return (
         <Box m="20px">
-            <Header title="CREATE USER" subtitle="Create a New User Profile" />
+            <Header title="Create User" subtitle="Create a new user profile" />
 
             <Formik onSubmit={handleFormSubmit} initialValues={initialValues} validationSchema={checkoutSchema}>
                 {({ values, errors, touched, handleBlur, handleChange, handleSubmit }) => (
@@ -63,7 +63,7 @@ const Form = () => {
                                 name="email"
                                 error={!!touched.email && !!errors.email}
                                 helperText={touched.email && errors.email}
-                                sx={{ gridColumn: 'span 4' }}
+                                sx={{ gridColumn: 'span 2' }}
                             />
                             <TextField
                                 fullWidth
@@ -76,32 +76,32 @@ const Form = () => {
                                 name="contact"
                                 error={!!touched.contact && !!errors.contact}
                                 helperText={touched.contact && errors.contact}
+                                sx={{ gridColumn: 'span 2' }}
+                            />
+                            <TextField
+                                fullWidth
+                                variant="filled"
+                                type="text"
+                                label="Username"
+                                onBlur={handleBlur}
+                                onChange={handleChange}
+                                value={values.username}
+                                name="username"
+                                error={!!touched.username && !!errors.username}
+                                helperText={touched.username && errors.username}
                                 sx={{ gridColumn: 'span 4' }}
                             />
                             <TextField
                                 fullWidth
                                 variant="filled"
                                 type="text"
-                                label="Address 1"
+                                label="Password"
                                 onBlur={handleBlur}
                                 onChange={handleChange}
-                                value={values.address1}
-                                name="address1"
-                                error={!!touched.address1 && !!errors.address1}
-                                helperText={touched.address1 && errors.address1}
-                                sx={{ gridColumn: 'span 4' }}
-                            />
-                            <TextField
-                                fullWidth
-                                variant="filled"
-                                type="text"
-                                label="Address 2"
-                                onBlur={handleBlur}
-                                onChange={handleChange}
-                                value={values.address2}
-                                name="address2"
-                                error={!!touched.address2 && !!errors.address2}
-                                helperText={touched.address2 && errors.address2}
+                                value={values.password}
+                                name="password"
+                                error={!!touched.password && !!errors.password}
+                                helperText={touched.password && errors.password}
                                 sx={{ gridColumn: 'span 4' }}
                             />
                         </Box>

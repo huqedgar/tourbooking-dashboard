@@ -2,6 +2,7 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 
 export const endpoints = {
+    'all-user': '/users/all-users/',
     'current-user': '/users/current-user/',
     'user-id': (userId) => `/users/${userId}/`,
     login: '/o/token/',

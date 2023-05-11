@@ -1,32 +1,62 @@
+import { useEffect, useState } from 'react';
+import { authAPI, endpoints } from '../configs/API';
+import { useTheme } from '@mui/material';
+import { tokens } from '../theme';
+import moment from 'moment-timezone';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { Box } from '@mui/material';
 import { DataGrid, GridToolbar } from '@mui/x-data-grid';
-import { tokens } from '../theme';
-import { mockDataContacts } from '../data/mockData';
 import Header from '../layouts/components/Header';
-import { useTheme } from '@mui/material';
 
 const Contacts = () => {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
+    const [users, setUsers] = useState(null);
+
+    const loadUsers = async () => {
+        try {
+            const res = await authAPI().get(endpoints['all-user']);
+            setUsers(res.data);
+        } catch (ex) {
+            toast.error(ex);
+        }
+    };
+
+    useEffect(() => {
+        loadUsers();
+    }, []);
+
+    if (!users) {
+        return <div className="app"></div>;
+    }
+
+    console.log(users);
 
     const columns = [
-        { field: 'id', headerName: 'ID', flex: 0.5 },
-        { field: 'registrarId', headerName: 'Registrar ID' },
         {
-            field: 'name',
-            headerName: 'Name',
+            field: 'id',
+            headerName: 'ID',
+            flex: 0.5,
+        },
+        {
+            field: 'username',
+            headerName: 'Username',
+            flex: 1,
+        },
+        {
+            field: 'first_name',
+            headerName: 'First Name',
+            flex: 1,
+        },
+        {
+            field: 'last_name',
+            headerName: 'Last Name',
             flex: 1,
             cellClassName: 'name-column--cell',
         },
         {
-            field: 'age',
-            headerName: 'Age',
-            type: 'number',
-            headerAlign: 'left',
-            align: 'left',
-        },
-        {
-            field: 'phone',
+            field: 'phone_number',
             headerName: 'Phone Number',
             flex: 1,
         },
@@ -36,25 +66,26 @@ const Contacts = () => {
             flex: 1,
         },
         {
+            field: 'gender',
+            headerName: 'Gender',
+            flex: 1,
+        },
+        {
+            field: 'date_of_birth',
+            headerName: 'Birthday',
+            flex: 1,
+            valueGetter: (params) => moment.tz(params.row.date_of_birth, 'UTC').format('DD/MM/YYYY'),
+        },
+        {
             field: 'address',
             headerName: 'Address',
-            flex: 1,
-        },
-        {
-            field: 'city',
-            headerName: 'City',
-            flex: 1,
-        },
-        {
-            field: 'zipCode',
-            headerName: 'Zip Code',
             flex: 1,
         },
     ];
 
     return (
         <Box m="20px">
-            <Header title="CONTACTS" subtitle="List of Contacts for Future Reference" />
+            <Header title="Information" subtitle="List of information for future reference" />
             <Box
                 m="40px 0 0 0"
                 height="75vh"
@@ -87,8 +118,14 @@ const Contacts = () => {
                     },
                 }}
             >
-                <DataGrid rows={mockDataContacts} columns={columns} components={{ Toolbar: GridToolbar }} />
+                <DataGrid
+                    disableSelectionOnClick={true}
+                    rows={users}
+                    columns={columns}
+                    components={{ Toolbar: GridToolbar }}
+                />
             </Box>
+            <ToastContainer />
         </Box>
     );
 };
